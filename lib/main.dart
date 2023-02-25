@@ -16,15 +16,48 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
-      light: ThemeData.light(),
-      dark: ThemeData.dark(),
+      light: ThemeData(
+        brightness: Brightness.light,
+        appBarTheme: AppBarTheme(backgroundColor: Colors.red),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.red),
+          ),
+        ),
+      ),
+      dark: ThemeData(
+        brightness: Brightness.dark,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.grey,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.grey,
+            foregroundColor: Colors.purple,
+          ),
+        ),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(
+            fontSize: 18,
+          ),
+          bodyText2: TextStyle(
+            fontSize: 18,
+          ),
+        ).apply(
+          bodyColor: Colors.orange,
+          displayColor: Colors.blue,
+        ),
+      ),
       initial: savedThemeMode ?? AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Adaptive Theme Demo',
         theme: theme,
         darkTheme: darkTheme,
-        home: const MyHomePage(title: ''),
+        home: const MyHomePage(title: 'light mode and dark mode demo'),
         routes: {
           SecondScreen.id: (context) => const SecondScreen(),
         },
